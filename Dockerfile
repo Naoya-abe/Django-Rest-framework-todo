@@ -9,11 +9,11 @@ COPY ./requirements.txt /requirements.txt
 
 RUN pip install -r /requirements.txt
 
-RUN mkdir /todo-api
+RUN mkdir /restframework-todo
 
-WORKDIR /todo-api
+WORKDIR /restframework-todo
 
-COPY ./todo-api /todo-api
+COPY ./restframework-todo /restframework-todo
 
 RUN adduser -D user
 
