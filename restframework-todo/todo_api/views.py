@@ -22,3 +22,16 @@ class UserViewSet(viewsets.ModelViewSet):
 class UserLoginApiView(ObtainAuthToken):
     """Handle creating user authentication tokens"""
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+
+class TodoItemViewSet(viewsets.ModelViewSet):
+    """Handles creating, reading and updating todo items"""
+    authentication_classes = (TokenAuthentication,)
+    serializer_class = serializers.TodoItemSerializer
+    queryset = models.TodoItem.objects.all()
+
+    permission_classes = (permissions.UpdateOwnTodo,)
+
+    def perform_create(self, serializer):
+        """Sets the user profile to the logged in user"""
+        serializer.save(user=self.request.user)

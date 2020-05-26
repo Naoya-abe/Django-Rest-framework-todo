@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
@@ -49,3 +50,16 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class TodoItem(models.Model):
+    """Database model for todo items in the system"""
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=100)
+    content = models.CharField(max_length=140)
+    is_finished = models.BooleanField(default=False)

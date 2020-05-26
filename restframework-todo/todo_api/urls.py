@@ -7,6 +7,7 @@ from todo_api import views
 
 router = DefaultRouter()
 router.register('users', views.UserViewSet)
+router.register('todos', views.TodoItemViewSet)
 
 urlpatterns = [
     path('login/', views.UserLoginApiView.as_view()),

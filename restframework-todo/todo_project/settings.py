@@ -123,3 +123,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'todo_api.User'
+
+TIME_ZONE = 'Asia/Tokyo'
+USE_TZ = True

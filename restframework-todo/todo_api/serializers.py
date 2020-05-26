@@ -42,3 +42,14 @@ class UserSerializer(serializers.ModelSerializer):
             instance.set_password(password)
 
         return super().update(instance, validated_data)
+
+
+class TodoItemSerializer(serializers.ModelSerializer):
+    """Serializes profile feed items"""
+    class Meta():
+        model = models.TodoItem
+        fields = (
+            'id', 'user', 'created_at',
+            'title', 'content', 'is_finished'
+        )
+        extra_kwargs = {'user': {'read_only': True}}
