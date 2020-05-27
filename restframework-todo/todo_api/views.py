@@ -12,6 +12,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from todo_api import serializers
 from todo_api import models
 from todo_api import permissions
+from todo_api import paginations
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -40,7 +41,12 @@ class TodoItemViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.TodoItemSerializer
     queryset = models.TodoItem.objects.all()
 
-    permission_classes = (permissions.UpdateOwnTodo, IsAuthenticatedOrReadOnly,)
+    permission_classes = (
+        permissions.UpdateOwnTodo,
+        IsAuthenticatedOrReadOnly,
+    )
+
+    pagination_class = paginations.TodoListPagination
 
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user"""
