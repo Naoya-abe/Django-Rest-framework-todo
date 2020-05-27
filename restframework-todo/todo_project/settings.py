@@ -39,12 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'todo_api'
+    'todo_api',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -126,3 +128,7 @@ AUTH_USER_MODEL = 'todo_api.User'
 
 TIME_ZONE = 'Asia/Tokyo'
 USE_TZ = True
+
+CORS_ORIGIN_WHITELIST=[
+    'http://localhost:3000',
+]
