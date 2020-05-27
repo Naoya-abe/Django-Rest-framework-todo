@@ -7,6 +7,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.settings import api_settings
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from todo_api import serializers
 from todo_api import models
@@ -39,7 +40,7 @@ class TodoItemViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.TodoItemSerializer
     queryset = models.TodoItem.objects.all()
 
-    permission_classes = (permissions.UpdateOwnTodo,)
+    permission_classes = (permissions.UpdateOwnTodo, IsAuthenticatedOrReadOnly,)
 
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user"""
