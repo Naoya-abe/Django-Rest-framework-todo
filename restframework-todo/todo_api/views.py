@@ -1,3 +1,5 @@
+import logging
+
 from django.shortcuts import render
 
 from rest_framework import viewsets
@@ -50,4 +52,5 @@ class TodoItemViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         """Sets the user profile to the logged in user"""
+        logging.debug(self.request.user)
         serializer.save(user=self.request.user)

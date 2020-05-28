@@ -5,7 +5,6 @@ from todo_api import models
 
 class UserSerializer(serializers.ModelSerializer):
     """Serialize a user object"""
-
     class Meta():
         model = models.User
         fields = (
@@ -13,6 +12,9 @@ class UserSerializer(serializers.ModelSerializer):
             'password', 'about', 'avatar_url'
         )
         extra_kwargs = {
+            'email': {
+                'write_only': True,
+            },
             'password': {
                 'write_only': True,
                 'style': {'input_type': 'password'}
@@ -46,6 +48,10 @@ class UserSerializer(serializers.ModelSerializer):
 
 class TodoItemSerializer(serializers.ModelSerializer):
     """Serializes profile feed items"""
+
+    # Get foreign key reference as an object, not a key value
+    user = UserSerializer()
+
     class Meta():
         model = models.TodoItem
         fields = (
