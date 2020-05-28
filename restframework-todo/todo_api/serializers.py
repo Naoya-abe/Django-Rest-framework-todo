@@ -50,7 +50,7 @@ class TodoItemSerializer(serializers.ModelSerializer):
     """Serializes profile feed items"""
 
     # Get foreign key reference as an object, not a key value
-    user = UserSerializer()
+    user = UserSerializer(read_only=True)
 
     class Meta():
         model = models.TodoItem
