@@ -41,7 +41,7 @@ class TodoItemViewSet(viewsets.ModelViewSet):
     """Handles creating, reading and updating todo items"""
     authentication_classes = (TokenAuthentication,)
     serializer_class = serializers.TodoItemSerializer
-    queryset = models.TodoItem.objects.all()
+    queryset = models.TodoItem.objects.order_by('-created_at')
 
     permission_classes = (
         permissions.UpdateOwnTodo,
